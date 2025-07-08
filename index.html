@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أنسيت روحي </title>
+    <title>أنسيت روحي - همسات من القلب</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -26,20 +26,21 @@
             line-height: 1.6;
             overflow-x: hidden;
             position: relative;
+            transition: background 1.5s ease;
         }
         
-        body::before {
-            content: "";
+        .bg-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://i.ibb.co/mP71DTN/IMG-2936.jpg') no-repeat center center;
             background-size: cover;
+            background-position: center;
             opacity: 0.4;
             z-index: -1;
             filter: blur(2px);
+            transition: opacity 1.5s ease;
         }
         
         .container {
@@ -66,6 +67,20 @@
             transition: all 0.5s ease;
             transform-style: preserve-3d;
             animation: floatTitle 6s ease-in-out infinite;
+            position: relative;
+        }
+        
+        h1::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #d32f2f, transparent);
+            border-radius: 50%;
+            filter: blur(2px);
         }
         
         @keyframes floatTitle {
@@ -97,7 +112,7 @@
         
         .poem-box {
             font-size: 1.8rem;
-            line-height: 1.8; /* تقليل المسافة بين الأسطر */
+            line-height: 1.8;
             color: #7d3c5c;
             font-weight: 500;
             position: relative;
@@ -109,7 +124,7 @@
             transform: translateX(-30px);
             transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
                         transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-            margin: 8px 0; /* تقليل المسافة بين البيت والآخر */
+            margin: 8px 0;
             transition-delay: calc(0.25s * var(--line-index));
         }
         
@@ -118,7 +133,6 @@
             transform: translateX(0);
         }
         
-        /* تأثير رجعي بسيط عند اكتمال الظهور */
         .poem-line.show:nth-child(2n) {
             transform: translateX(3px);
             transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
@@ -127,9 +141,13 @@
         
         .btn-container {
             margin: 35px 0 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
         }
         
-        #newPoemBtn {
+        .main-btn {
             background: linear-gradient(145deg, #d32f2f, #b71c1c);
             color: white;
             border: none;
@@ -143,20 +161,39 @@
             position: relative;
             overflow: hidden;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         
-        #newPoemBtn:hover {
+        .action-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: #d32f2f;
+            border: 2px solid #d32f2f;
+            border-radius: 50px;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(211, 47, 47, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .main-btn:hover, .action-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(211, 47, 47, 0.6);
-            background: linear-gradient(145deg, #b71c1c, #d32f2f);
         }
         
-        #newPoemBtn:active {
+        .main-btn:active, .action-btn:active {
             transform: translateY(2px) scale(0.98);
             box-shadow: 0 5px 15px rgba(211, 47, 47, 0.5);
         }
         
-        #newPoemBtn::after {
+        .main-btn::after {
             content: "";
             position: absolute;
             top: 0;
@@ -168,8 +205,148 @@
             transition: transform 0.5s ease;
         }
         
-        #newPoemBtn:hover::after {
+        .main-btn:hover::after {
             transform: translateX(100%);
+        }
+        
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .heart {
+            position: absolute;
+            color: rgba(211, 47, 47, 0.4);
+            font-size: 20px;
+            animation: floatHeart 8s ease-in-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.7;
+            }
+            80% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .bg-selector {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        
+        .bg-option {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .bg-option:hover {
+            transform: scale(1.1);
+            border-color: #d32f2f;
+        }
+        
+        .bg-option.active {
+            border: 3px solid #d32f2f;
+            box-shadow: 0 0 15px rgba(211, 47, 47, 0.5);
+        }
+        
+        .social-share {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease 0.5s;
+        }
+        
+        .social-share.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #d32f2f;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+        
+        .social-btn.facebook:hover {
+            background: #3b5998;
+        }
+        
+        .social-btn.twitter:hover {
+            background: #1DA1F2;
+        }
+        
+        .social-btn.whatsapp:hover {
+            background: #25D366;
+        }
+        
+        .social-btn.copy:hover {
+            background: #7d3c5c;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            color: #d32f2f;
+            padding: 15px 30px;
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 500;
+        }
+        
+        .notification.show {
+            opacity: 1;
         }
         
         /* حركات ظهور الشعر */
@@ -206,12 +383,17 @@
             
             .poem-box {
                 font-size: 1.6rem;
-                line-height: 1.7; /* تقليل المسافة بين الأسطر للجوال */
+                line-height: 1.7;
             }
             
-            #newPoemBtn {
+            .main-btn {
                 padding: 18px 50px;
                 font-size: 1.5rem;
+            }
+            
+            .action-btn {
+                padding: 12px 20px;
+                font-size: 1rem;
             }
             
             .container {
@@ -220,6 +402,10 @@
             
             .poem-container {
                 padding: 35px 25px;
+            }
+            
+            .btn-container {
+                gap: 10px;
             }
         }
         
@@ -230,12 +416,17 @@
             
             .poem-box {
                 font-size: 1.4rem;
-                line-height: 1.6; /* تقليل المسافة بين الأسطر للجوال */
+                line-height: 1.6;
             }
             
-            #newPoemBtn {
+            .main-btn {
                 padding: 16px 40px;
                 font-size: 1.3rem;
+            }
+            
+            .action-btn {
+                padding: 10px 15px;
+                font-size: 0.9rem;
             }
             
             .container {
@@ -247,8 +438,13 @@
             }
             
             .poem-line {
-                margin: 6px 0; /* تقليل المسافة بين البيت والآخر للجوال */
+                margin: 6px 0;
                 transform: translateX(-20px);
+            }
+            
+            .bg-option {
+                width: 40px;
+                height: 40px;
             }
         }
         
@@ -261,9 +457,14 @@
                 font-size: 1.2rem;
             }
             
-            #newPoemBtn {
+            .main-btn {
                 padding: 14px 35px;
                 font-size: 1.2rem;
+            }
+            
+            .action-btn {
+                padding: 8px 12px;
+                font-size: 0.8rem;
             }
             
             .poem-line {
@@ -296,12 +497,12 @@
             from { background-position: 0 0; }
             to { background-position: 0 1000px; }
         }
-        
-        /* تم حذف قسم الرسالة الخاصة */
-        /* تم حذف قسم التذييل */
     </style>
 </head>
 <body>
+    <div class="bg-overlay" id="bgOverlay"></div>
+    <div class="floating-hearts" id="floatingHearts"></div>
+    
     <div class="container fade-in">
         <div class="title-container">
             <h1>أنسيت روحي</h1>
@@ -315,21 +516,109 @@
         </div>
         
         <div class="btn-container">
-            <button id="newPoemBtn">همسة جديدة <i class="fas fa-heart"></i></button>
+            <button class="main-btn" id="newPoemBtn">
+                همسة جديدة 
+                <i class="fas fa-heart"></i>
+            </button>
+            
+            <button class="action-btn" id="copyBtn">
+                <i class="fas fa-copy"></i> 
+                نسخ الهمسة
+            </button>
+        </div>
+        
+        <div class="social-share" id="socialShare">
+            <div class="social-btn facebook" title="مشاركة على فيسبوك">
+                <i class="fab fa-facebook-f"></i>
+            </div>
+            <div class="social-btn twitter" title="مشاركة على تويتر">
+                <i class="fab fa-twitter"></i>
+            </div>
+            <div class="social-btn whatsapp" title="مشاركة على واتساب">
+                <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="social-btn copy" title="نسخ الهمسة">
+                <i class="fas fa-copy"></i>
+            </div>
+        </div>
+        
+        <div class="bg-selector">
+            <div class="bg-option active" style="background-image: url('https://images.unsplash.com/photo-1506634572416-48cdfe530110?q=80&w=1450')" data-bg="https://images.unsplash.com/photo-1506634572416-48cdfe530110?q=80&w=1450"></div>
+            <div class="bg-option" style="background-image: url('https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=1374')" data-bg="https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?q=80&w=1374"></div>
+            <div class="bg-option" style="background-image: url('https://images.unsplash.com/photo-1513001900722-370f803f498d?q=80&w=1374')" data-bg="https://images.unsplash.com/photo-1513001900722-370f803f498d?q=80&w=1374"></div>
+            <div class="bg-option" style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1473')" data-bg="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=1473"></div>
+            <div class="bg-option" style="background-image: url('https://images.unsplash.com/photo-1476820865390-c52aeebb9891?q=80&w=1470')" data-bg="https://images.unsplash.com/photo-1476820865390-c52aeebb9891?q=80&w=1470"></div>
         </div>
     </div>
-
-    <!-- تضمين ملف الأشعار أولاً -->
-<script src="poems.js"></script>
     
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText"></span>
+    </div>
+
     <script>
+        // بيانات الأشعار
+        const poems = [
+            [
+                "في قلبي حكاية ما سمعتها الدنيا",
+                "عن حبٍّ يضيء كالنجوم في السما",
+                "أنتِ الحب الذي أضاء حياتي",
+                "والروح التي في قلبي سكنت"
+            ],
+            [
+                "لو تسأليني عن معنى الحب",
+                "أقول لكِ أنتِ المعنى وكل الجواب",
+                "ففي عينيكِ وجدتِ الحياة",
+                "وفي قلبكِ وجدتِ الأمان"
+            ],
+            [
+                "يا من أضاء دربي بنور الوجود",
+                "أنتِ الحياة وكل معاني السرور",
+                "في ليل عمري كنتِ القمر المنير",
+                "وفي ظلمة الأيام كنتِ الضياء"
+            ],
+            [
+                "حبكِ في قلبي كالورد في الربيع",
+                "ينمو ويزهر في كل الفصول",
+                "لا يعرف الشتاء ولا يخشى الجفاف",
+                "فأنتِ الماء والدفء والضياء"
+            ],
+            [
+                "عندما أغمض عيني أراكِ",
+                "وعندما أفتحها أرى الدنيا كلها فيكِ",
+                "فأنتِ الكون الذي أعيش فيه",
+                "والروح التي تحملني إلى السماء"
+            ],
+            [
+                "لو أن الحب بحرٌ واسعٌ",
+                "فأنتِ ذلك البحر في عيني",
+                "وإن كانت الدنيا صحراء قاحلة",
+                "فأنتِ الواحة التي تروي ظمأ قلبي"
+            ],
+            [
+                "في عينيكِ وجدتِ الكون",
+                "وفي صوتكِ سمعتِ الموسيقى",
+                "وفي لمسة يدكِ شعرتِ بالحياة",
+                "وفي وجودكِ عرفتِ معنى السعادة"
+            ]
+        ];
+        
         // عناصر DOM
         const poemBox = document.getElementById('poemBox');
         const newPoemBtn = document.getElementById('newPoemBtn');
+        const copyBtn = document.getElementById('copyBtn');
         const title = document.querySelector('h1');
+        const bgOverlay = document.getElementById('bgOverlay');
+        const bgOptions = document.querySelectorAll('.bg-option');
+        const floatingHearts = document.getElementById('floatingHearts');
+        const socialShare = document.getElementById('socialShare');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        const socialBtns = document.querySelectorAll('.social-btn');
         
         // متغير لحفظ حالة القصيدة الحالية
         let currentPoemIndex = 0;
+        let currentPoem = [];
         
         // إضافة تفاعلية للعنوان
         title.addEventListener('mouseenter', () => {
@@ -339,18 +628,46 @@
             }, 10);
         });
         
-        // إضافة تأثير النقر للزر
-        newPoemBtn.addEventListener('mousedown', () => {
-            newPoemBtn.style.transform = 'translateY(2px) scale(0.98)';
-        });
+        // إنشاء قلوب متحركة
+        function createHearts() {
+            const heartCount = 15;
+            for (let i = 0; i < heartCount; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.innerHTML = '<i class="fas fa-heart"></i>';
+                    heart.classList.add('heart');
+                    
+                    // مواضع عشوائية
+                    heart.style.left = `${Math.random() * 100}%`;
+                    heart.style.fontSize = `${Math.random() * 20 + 10}px`;
+                    heart.style.animationDuration = `${Math.random() * 5 + 5}s`;
+                    
+                    floatingHearts.appendChild(heart);
+                    
+                    // إزالة القلب بعد انتهاء التحريك
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 8000);
+                }, i * 300);
+            }
+        }
         
-        newPoemBtn.addEventListener('mouseup', () => {
-            newPoemBtn.style.transform = 'translateY(-5px)';
-        });
-        
-        newPoemBtn.addEventListener('mouseleave', () => {
-            newPoemBtn.style.transform = 'translateY(0)';
-        });
+        // تغيير الخلفية
+        function changeBackground(bgUrl) {
+            bgOverlay.style.opacity = 0;
+            setTimeout(() => {
+                bgOverlay.style.backgroundImage = `url('${bgUrl}')`;
+                bgOverlay.style.opacity = 0.4;
+            }, 500);
+            
+            // تحديث الخيارات النشطة
+            bgOptions.forEach(option => {
+                option.classList.remove('active');
+                if(option.dataset.bg === bgUrl) {
+                    option.classList.add('active');
+                }
+            });
+        }
         
         // عرض شعر عشوائي مع حركة ناعمة
         function displayRandomPoem() {
@@ -365,6 +682,9 @@
                 }, 500);
             });
             
+            // إخفاء أزرار المشاركة
+            socialShare.classList.remove('show');
+            
             // اختيار شعر عشوائي
             let randomIndex;
             do {
@@ -372,13 +692,13 @@
             } while (randomIndex === currentPoemIndex && poems.length > 1);
             
             currentPoemIndex = randomIndex;
-            const selectedPoem = poems[randomIndex];
+            currentPoem = poems[randomIndex];
             
             // إضافة الأسطر الجديدة مع حركة ظهور تدريجي
             setTimeout(() => {
                 poemBox.innerHTML = '';
                 
-                selectedPoem.forEach((line, index) => {
+                currentPoem.forEach((line, index) => {
                     const p = document.createElement('p');
                     p.classList.add('poem-line');
                     p.textContent = line;
@@ -388,9 +708,64 @@
                     // تأخير ظهور كل سطر
                     setTimeout(() => {
                         p.classList.add('show');
+                        
+                        // إظهار أزرار المشاركة بعد ظهور كل الأسطر
+                        if(index === currentPoem.length - 1) {
+                            setTimeout(() => {
+                                socialShare.classList.add('show');
+                            }, 500);
+                        }
                     }, 250 * (index + 1));
                 });
             }, 500);
+            
+            // إنشاء قلوب متحركة
+            createHearts();
+        }
+        
+        // نسخ القصيدة
+        function copyPoem() {
+            const poemText = currentPoem.join('\n');
+            navigator.clipboard.writeText(poemText)
+                .then(() => {
+                    showNotification('تم نسخ الهمسة بنجاح');
+                })
+                .catch(err => {
+                    showNotification('حدث خطأ أثناء النسخ');
+                });
+        }
+        
+        // مشاركة على وسائل التواصل
+        function shareOnSocial(platform) {
+            const poemText = currentPoem.join('\n\n');
+            const shareUrl = encodeURIComponent(window.location.href);
+            const shareText = encodeURIComponent(`${poemText}\n\nهمسة من موقع أنسيت روحي`);
+            
+            let url = '';
+            
+            switch(platform) {
+                case 'facebook':
+                    url = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+                    break;
+                case 'twitter':
+                    url = `https://twitter.com/intent/tweet?text=${shareText}`;
+                    break;
+                case 'whatsapp':
+                    url = `https://api.whatsapp.com/send?text=${shareText}`;
+                    break;
+            }
+            
+            window.open(url, '_blank', 'width=600,height=400');
+        }
+        
+        // عرض الإشعار
+        function showNotification(text) {
+            notificationText.textContent = text;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
         }
         
         // تهيئة الصفحة عند التحميل
@@ -400,6 +775,34 @@
             
             // إضافة حدث النقر على الزر
             newPoemBtn.addEventListener('click', displayRandomPoem);
+            
+            // نسخ القصيدة
+            copyBtn.addEventListener('click', copyPoem);
+            
+            // تغيير الخلفيات
+            bgOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    changeBackground(option.dataset.bg);
+                });
+            });
+            
+            // أزرار المشاركة
+            socialBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    if(btn.classList.contains('facebook')) {
+                        shareOnSocial('facebook');
+                    } else if(btn.classList.contains('twitter')) {
+                        shareOnSocial('twitter');
+                    } else if(btn.classList.contains('whatsapp')) {
+                        shareOnSocial('whatsapp');
+                    } else if(btn.classList.contains('copy')) {
+                        copyPoem();
+                    }
+                });
+            });
+            
+            // إنشاء قلوب متحركة دورية
+            setInterval(createHearts, 10000);
         });
     </script>
 </body>
